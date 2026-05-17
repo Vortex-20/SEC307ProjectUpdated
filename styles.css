@@ -1,0 +1,763 @@
+/* ============================================================
+   SWATTED: An Awareness Site on Online Swatting
+   Editorial / investigative aesthetic
+   Palette: ink black, alarm red, bone cream, caution amber
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400&family=JetBrains+Mono:wght@400;600&family=Archivo:wght@400;600;800;900&display=swap');
+
+:root {
+  --ink: #0f0e0c;
+  --bone: #f3ede1;
+  --bone-2: #e8dfcd;
+  --alarm: #c9321f;
+  --alarm-deep: #8f1b0c;
+  --amber: #d4a23a;
+  --text-on-dark: #d8c9a8;
+  --rule: #1a1816;
+  --muted: #5a544a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bone);
+  color: var(--ink);
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(201, 50, 31, 0.04) 0, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(15, 14, 12, 0.03) 0, transparent 50%);
+}
+
+/* Grain overlay for texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* =========================
+   MASTHEAD & NAV
+   ========================= */
+.masthead {
+  border-bottom: 3px double var(--ink);
+  padding: 1.2rem 2rem 0.8rem;
+  background: var(--bone);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  background: rgba(243, 237, 225, 0.96);
+}
+
+.masthead-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.logo {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  text-decoration: none;
+  line-height: 0.9;
+}
+
+.logo .dot {
+  color: var(--alarm);
+  display: inline-block;
+  transform: translateY(-0.1em);
+}
+
+.logo .sub {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+
+.issue-line {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.issue-line .red { color: var(--alarm); font-weight: 600; }
+
+.nav {
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  background: var(--ink);
+}
+
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  color: var(--text-on-dark);
+  text-decoration: none;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  padding: 1rem 1.4rem;
+  border-right: 1px solid rgba(243, 237, 225, 0.15);
+  transition: background 0.2s, color 0.2s;
+  position: relative;
+}
+
+.nav a:hover { background: var(--alarm); color: var(--text-on-dark); }
+
+.nav a.active {
+  background: var(--alarm);
+  color: var(--text-on-dark);
+}
+
+.nav a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--amber);
+}
+
+/* =========================
+   MAIN LAYOUT
+   ========================= */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.2rem 2rem 3rem;
+}
+
+/* =========================
+   DISCLAIMER BOX
+   ========================= */
+.disclaimer {
+  background: var(--bone-2);
+  border: 2px solid var(--ink);
+  border-left: 6px solid var(--amber);
+  padding: 1.3rem 1.5rem;
+  margin: 2.5rem 0 1rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.disclaimer h4 {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 900;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--alarm-deep);
+  margin-bottom: 0.6rem;
+}
+
+.disclaimer p { margin-bottom: 0; max-width: 100%; }
+
+.kicker {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--alarm);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--alarm);
+  background: rgba(201, 50, 31, 0.06);
+}
+
+h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  color: var(--ink);
+}
+
+h1 em {
+  font-style: italic;
+  color: var(--alarm);
+  font-weight: 400;
+}
+
+.deck {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.4;
+  max-width: 50ch;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  border-left: 3px solid var(--alarm);
+  padding-left: 1.2rem;
+  font-style: italic;
+}
+
+h2 {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 900;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  margin: 2.2rem 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--ink);
+  display: inline-block;
+}
+
+h2 .num {
+  color: var(--alarm);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55em;
+  vertical-align: top;
+  margin-right: 0.5rem;
+  letter-spacing: 0;
+}
+
+h3 {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  margin: 1.4rem 0 0.6rem;
+  color: var(--ink);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+p {
+  margin-bottom: 1rem;
+  max-width: 70ch;
+}
+
+main p + p { text-indent: 0; }
+
+strong { color: var(--alarm-deep); font-weight: 600; }
+
+/* =========================
+   STAT BLOCKS
+   ========================= */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0 3rem;
+}
+
+.stat {
+  background: var(--ink);
+  color: var(--text-on-dark);
+  padding: 1.8rem 1.5rem;
+  border-top: 4px solid var(--alarm);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  border: 1px solid rgba(243, 237, 225, 0.1);
+  border-radius: 50%;
+}
+
+.stat .num {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--amber);
+  display: block;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.03em;
+}
+
+.stat .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-on-dark);
+  line-height: 1.4;
+}
+
+/* Variant: natural-case stat labels (used on Crime Impact tab) */
+.stat-grid.natural-case .stat .label {
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-size: 0.78rem;
+}
+
+/* =========================
+   PULL QUOTE / WARNING BOX
+   ========================= */
+.pull {
+  background: var(--bone-2);
+  border-left: 6px solid var(--alarm);
+  padding: 1.8rem 2rem;
+  margin: 2.5rem 0;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  position: relative;
+}
+
+.pull::before {
+  content: '"';
+  position: absolute;
+  top: -0.8rem;
+  left: 1rem;
+  font-size: 4rem;
+  color: var(--alarm);
+  font-family: 'Fraunces', serif;
+  line-height: 1;
+}
+
+.warning {
+  background: var(--ink);
+  color: var(--text-on-dark);
+  padding: 2rem;
+  margin: 2.5rem 0;
+  border-left: 6px solid var(--amber);
+}
+
+.warning h3 {
+  color: var(--amber);
+  margin-top: 0;
+}
+
+/* =========================
+   HERO IMAGES
+   ========================= */
+.hero {
+  position: relative;
+  margin: 1.5rem 0 2.5rem;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--alarm);
+}
+
+.hero-art {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  filter: contrast(1.05) saturate(0.95);
+}
+
+.hero-caption {
+  background: var(--ink);
+  color: var(--text-on-dark);
+  padding: 0.7rem 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hero-caption .tag {
+  color: var(--amber);
+  font-weight: 600;
+}
+
+.hero-caption .note {
+  color: var(--text-on-dark);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0.05em;
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+  .hero { box-shadow: 4px 4px 0 var(--alarm); }
+  .hero-art { aspect-ratio: 4 / 3; }
+  .hero-caption { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+}
+
+/* =========================
+   LISTS
+   ========================= */
+ul.check, ul.alert {
+  list-style: none;
+  margin: 1rem 0 2rem;
+  max-width: 70ch;
+}
+
+ul.check li, ul.alert li {
+  padding: 0.6rem 0 0.6rem 2rem;
+  position: relative;
+  border-bottom: 1px dotted var(--muted);
+}
+
+ul.check li::before {
+  content: '✓';
+  position: absolute;
+  left: 0.3rem;
+  color: var(--alarm);
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+ul.alert li::before {
+  content: '▲';
+  position: absolute;
+  left: 0.3rem;
+  color: var(--alarm);
+  font-size: 0.8rem;
+  top: 0.9rem;
+}
+
+/* =========================
+   LAW CARDS
+   ========================= */
+.law-card {
+  background: var(--bone-2);
+  border: 1px solid var(--ink);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  position: relative;
+}
+
+.law-card .code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--alarm-deep);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.law-card .name {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.law-card .penalty {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--amber);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  margin-top: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.law-card .fine {
+  display: inline-block;
+  background: var(--alarm-deep);
+  color: var(--text-on-dark);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  margin-top: 0.6rem;
+  margin-left: 0.4rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* =========================
+   MENS REA / ACTUS REUS TABLE
+   ========================= */
+.element-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.element-grid > div {
+  background: var(--bone-2);
+  padding: 1.5rem;
+  border-top: 3px solid var(--alarm);
+}
+
+.element-grid h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--alarm-deep);
+  margin-bottom: 0.8rem;
+}
+
+@media (max-width: 640px) {
+  .element-grid { grid-template-columns: 1fr; }
+}
+
+/* =========================
+   CITATION & REFERENCES
+   ========================= */
+.citation {
+  font-size: 0.92em;
+  color: var(--muted);
+}
+
+.references {
+  margin-top: 2.5rem;
+  padding: 2rem 0 0;
+  border-top: 3px double var(--ink);
+}
+
+.references h2 {
+  border: none;
+  font-size: 1.6rem;
+  margin-top: 0;
+}
+
+.references ol {
+  list-style: none;
+  counter-reset: ref;
+  padding-left: 0;
+}
+
+.references li {
+  counter-increment: ref;
+  padding: 0.8rem 0 0.8rem 2.5rem;
+  position: relative;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--ink);
+  font-weight: 400;
+  border-bottom: 1px dotted var(--muted);
+  text-indent: -1.5rem;
+  padding-left: 4rem;
+}
+
+.references li::before {
+  content: counter(ref, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--alarm);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-indent: 0;
+}
+
+.references em { font-style: italic; font-weight: 400; font-family: Georgia, 'Times New Roman', serif; }
+
+/* =========================
+   HOME PAGE SPECIAL BITS
+   ========================= */
+.hero-home {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 3rem;
+  align-items: end;
+  margin-bottom: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--ink);
+}
+
+@media (max-width: 880px) {
+  .hero-home { grid-template-columns: 1fr; }
+}
+
+.byline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+}
+
+.tab-intro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+
+.tab-intro a {
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--bone-2);
+  padding: 1.5rem;
+  border-left: 4px solid var(--alarm);
+  transition: transform 0.2s, background 0.2s;
+  display: block;
+}
+
+.tab-intro a:hover {
+  transform: translateX(4px);
+  background: var(--ink);
+  color: var(--text-on-dark);
+}
+
+.tab-intro a:hover .tab-num { color: var(--amber); }
+
+.tab-intro .tab-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--alarm);
+  display: block;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.15em;
+}
+
+.tab-intro .tab-title {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.tab-intro .tab-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.tab-intro a:hover .tab-desc { color: var(--text-on-dark); }
+
+/* =========================
+   FOOTER
+   ========================= */
+footer {
+  background: var(--ink);
+  color: var(--text-on-dark);
+  padding: 2rem;
+  margin-top: 2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+
+footer .bar {
+  display: inline-block;
+  width: 40px;
+  height: 3px;
+  background: var(--alarm);
+  margin: 0 0.5rem;
+  vertical-align: middle;
+}
+
+/* =========================
+   INLINE CITATIONS
+   ========================= */
+cite {
+  font-style: normal;
+  font-size: 0.9em;
+  color: var(--muted);
+}
+
+/* =========================
+   TIMELINE
+   ========================= */
+.timeline {
+  margin: 2rem 0;
+  border-left: 3px solid var(--ink);
+  padding-left: 2rem;
+}
+
+.timeline-item {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -2.6rem;
+  top: 0.3rem;
+  width: 14px;
+  height: 14px;
+  background: var(--alarm);
+  border: 3px solid var(--bone);
+  border-radius: 50%;
+}
+
+.timeline-item .year {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--alarm);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+}
+
+.timeline-item .event {
+  font-size: 1rem;
+  color: var(--ink);
+  margin-top: 0.3rem;
+}
+
+/* =========================
+   ANIMATIONS
+   ========================= */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+main > * { animation: fadeUp 0.6s ease-out backwards; }
+main > *:nth-child(2) { animation-delay: 0.1s; }
+main > *:nth-child(3) { animation-delay: 0.2s; }
+main > *:nth-child(4) { animation-delay: 0.3s; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.blink { animation: pulse 1.5s infinite; }
+
+/* Responsive tweaks */
+@media (max-width: 640px) {
+  .masthead { padding: 1rem; }
+  .logo { font-size: 1.5rem; }
+  .nav a { padding: 0.8rem 1rem; font-size: 0.7rem; }
+  main { padding: 2rem 1.2rem 3rem; }
+}
